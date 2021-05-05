@@ -19,22 +19,37 @@ Additional description about the project and its features. -->
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+To get a local copy up and running, follow these simple example steps.
 
-To get a local copy up and running, simply clone the repo https://github.com/joshuaivie/mv-rb_Tic-Tac-Toe into you local machine.
+- Install the prerequisites on your local machine
+- Clone the repository to your local machine as described in the setup section
+- run the ~/bin/main.rb file using ruby in your terminal as described in the usage section
 
 ### Prerequisites
 
+1. Code Editor
+2. Terminal (Bash)
+3. Git
+4. Ruby
+
 ### Setup
 
-### Install
+- Open your terminal and navigate to location in which you would like to setup the project.
+- Run the following command in your terminal
+
+```console
+git clone https://github.com/joshuaivie/mv-rb_Tic-Tac-Toe
+```
 
 ### Usage
 
-### Run tests
+- Ensure you're in the directory in which you've set up the project
+- Run the following command
 
-### Deployment
+```console
+cd ./bin
+ruby main.rb
+```
 
 ## Authors
 
