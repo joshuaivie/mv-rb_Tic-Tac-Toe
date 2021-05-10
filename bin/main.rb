@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+
+require_relative '../lib/selection'
+require_relative '../lib/player'
+
 begin
   module GameText
     WELCOME_MESSAGE = "Welcome to Boaz and Joshua's Tic Tac Toe Game"
