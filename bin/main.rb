@@ -11,6 +11,20 @@ begin
     INTERRUPT_MESSAGE = ["\nWe're sorry to see you go.\nExiting..."]
   end
 
+  board_interface = [1, 2, 3, 4, 5, 6, 7, 8, 9] # Define the viriable board_interface
+
+  def display_board(board_interface)
+    puts "+---+---+---+"
+    puts "| #{board_interface[0]} | #{board_interface[1]} | #{board_interface[2]} |"
+    puts "+---+---+---+"
+    puts "| #{board_interface[3]} | #{board_interface[4]} | #{board_interface[5]} |"
+    puts "+---+---+---+"
+    puts "| #{board_interface[6]} | #{board_interface[7]} | #{board_interface[8]} |"
+    puts "+---+---+---+"
+  end
+
+  puts board_interface
+
   module GameUtils
     def self.clear_screen
       system('clear') || system('cls')
