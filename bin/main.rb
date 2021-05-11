@@ -7,16 +7,16 @@ begin
                     'Players take turns putting their marks in empty squares by inputting a number corresponding to the square in which they want to play',
                     'The first player to get 3 marks in a row (up, down, across, or diagonally) is the winner',
                     'When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.']
-    EXIT_MESSAGE = ['Thank you for playing our game', 'Have a good day!']
+    EXIT_MESSAGE = ['Thank you for playing our game', 'Have a great day!']
     INTERRUPT_MESSAGE = ["\nWe're sorry to see you go.\nExiting..."]
   end
 
   module GameUtils
-    def self.clear_screen
+    def clear_screen
       system('clear') || system('cls')
     end
 
-    def self.word_wrap(words, indent = 0)
+    def word_wrap(words, indent = 0)
       character_array = words.split('')
       new_character_array = []
       reset_counter = 0
@@ -49,44 +49,76 @@ begin
   end
 
   def print_welcome_message
-    puts GameText::WELCOME_MESSAGE
+    include GameText
+    puts WELCOME_MESSAGE
   end
 
   def print_game_instructions
+    include GameText
+    include GameUtils
+
     sleep(0.5)
     puts "\nGAME INSTRUCTIONS"
-    GameText::INSTRUCTIONS.each_with_index do |instruction, index|
+    INSTRUCTIONS.each_with_index do |instruction, index|
       text = "#{index + 1} - #{instruction}"
-      puts GameUtils.word_wrap(text, 4)
+      puts word_wrap(text, 4)
       sleep(2)
     end
   end
 
   def start_game?
+    include GameUtils
+
     puts "\nPress 1 to start.     Press 2 to Exit."
     user_input = gets.chomp
+
     if user_input.to_i == 1
       true
     elsif user_input.to_i == 2
       false
     else
-      GameUtils.clear_screen
+      clear_screen
       puts 'Invalid Input!'
       start_game?
     end
   end
 
-  at_exit do
-    GameUtils.clear_screen
-    GameText::EXIT_MESSAGE.each do |message|
-      puts message
-      sleep(2)
-      GameUtils.clear_screen
+  # at_exit do
+  #   include GameUtils
+  #   GameUtils.clear_screen
+  #   GameText::EXIT_MESSAGE.each do |message|
+  #     puts message
+  #     sleep(2)
+  #     GameUtils.clear_screen
+  #   end
+  # end
+
+  class BoardCell
+    attr_reader :position, :value
+
+    def initialize(position = 0, value = nil)
+      @position = position
+      @value = value.nil? ? position : value
+      @value_changed = false
+    end
+
+    def write_value(value)
+      if @value_changed == false && %w[X O].include?(value)
+        @value = value
+        @value_changed = true
+        'sucess'
+      elsif @value_changed
+        'value already changed'
+      else
+        'must be X or O'
+      end
     end
   end
 
   def luanch_game
-    GameUtils.clear_screen
+    include GameUtils
+
+    clear_screen
     print_welcome_message
     print_game_instructions
     if start_game?
@@ -96,7 +128,7 @@ begin
     end
   end
 
-  luanch_game
+  # luanch_game
 rescue Interrupt
   system('stty -echoctl')
   puts GameText::INTERRUPT_MESSAGE
