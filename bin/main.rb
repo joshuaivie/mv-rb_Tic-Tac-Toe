@@ -138,6 +138,29 @@ begin
       @grid[y][x].position
     end
 
+    def draw_board
+      column_iterator = 0
+      column_divider = "#{'+---' * @max_width}+"
+
+      @max_height.times do
+        puts column_divider
+
+        row = []
+        row_iterator = 0
+        @max_width.times do
+          value = get_value(row_iterator, column_iterator)
+          cell_text = row_iterator == (@max_width - 1) ? "| #{value} |" : "| #{value} "
+          row.push(cell_text)
+          row_iterator += 1
+        end
+
+        result_string = row.join
+        puts result_string
+        column_iterator += 1
+      end
+      puts column_divider
+    end
+
     private
 
     def create_positions
