@@ -1,11 +1,11 @@
 require_relative './cell'
 
 class Board
-  attr_reader :grid, :positions_array
+  attr_reader :grid, :positions_array, :max_width, :max_height
 
   def initialize(max_width = 3, max_height = 3)
-    @max_width = max_width <= 3 ? max_width : 3
-    @max_height = max_height <= 3 ? max_height : 3
+    @max_width = max_width >= 3 ? max_width : 3
+    @max_height = max_height >= 3 ? max_height : 3
     @board_size = max_height * max_width
     @positions_array = create_positions
     @grid = build_grid
@@ -19,7 +19,7 @@ class Board
     @grid[y][x].value
   end
 
-  def set_position(x, y)
+  def get_position(x, y)
     @grid[y][x].position
   end
 
@@ -79,3 +79,6 @@ class Board
     grid
   end
 end
+
+board = Board.new(4, 4)
+puts board.draw_board
