@@ -115,6 +115,18 @@ begin
     end
   end
 
+  class Board
+    attr_reader :grid, :positions_array
+
+    def initialize(max_width = 3, max_height = 3)
+      @max_width = max_width <= 3 ? max_width : 3
+      @max_height = max_height <= 3 ? max_height : 3
+      @board_size = max_height * max_width
+      @positions_array = create_positions
+      @grid = build_grid
+    end
+  end
+
   def luanch_game
     include GameUtils
 
