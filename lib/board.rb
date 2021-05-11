@@ -4,8 +4,8 @@ class Board
   attr_reader :grid, :positions_array, :max_width, :max_height
 
   def initialize(max_width = 3, max_height = 3)
-    @max_width = max_width >= 3 ? max_width : 3
-    @max_height = max_height >= 3 ? max_height : 3
+    @max_width = max_width <= 3 ? max_width : 3
+    @max_height = max_height <= 3 ? max_height : 3
     @board_size = max_height * max_width
     @positions_array = create_positions
     @grid = build_grid
@@ -80,5 +80,5 @@ class Board
   end
 end
 
-board = Board.new(4, 4)
+board = Board.new()
 puts board.draw_board
