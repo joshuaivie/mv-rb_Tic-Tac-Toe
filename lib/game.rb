@@ -11,7 +11,7 @@ class Game
 
   def startGame
     @board = Board.new
-    @board.draw_board
+    puts @board.draw_board
 
     width = @board.max_width
     height = @board.max_height
