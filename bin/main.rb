@@ -125,6 +125,37 @@ begin
       @positions_array = create_positions
       @grid = build_grid
     end
+
+    private
+
+    def create_positions
+      result_array = []
+      (1..@board_size).each do |item|
+        result_array << item
+      end
+      result_array
+    end
+
+    def build_grid
+      grid = []
+      positions_array_iterator = 0
+
+      @max_height.times do
+        row = []
+        row_iterator = 0
+
+        @max_width.times do
+          position = @positions_array[positions_array_iterator]
+          row[row_iterator] = BoardCell.new(position)
+          row_iterator += 1
+          positions_array_iterator += 1
+        end
+
+        grid << row
+      end
+
+      grid
+    end
   end
 
   def luanch_game
