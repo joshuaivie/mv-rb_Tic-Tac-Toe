@@ -126,6 +126,18 @@ begin
       @grid = build_grid
     end
 
+    def set_value(x, y, value)
+      @grid[y][x].write_value(value)
+    end
+
+    def get_value(x, y)
+      @grid[y][x].value
+    end
+
+    def set_position(x, y)
+      @grid[y][x].position
+    end
+
     private
 
     def create_positions
