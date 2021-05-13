@@ -1,7 +1,7 @@
 require_relative './cell'
 
 class Board
-  attr_reader :grid, :positions_array, :max_width, :max_height
+  attr_reader :grid, :positions_array, :max_width, :max_height, :board_size
 
   def initialize(max_width = 3, max_height = 3)
     @max_width = max_width >= 3 ? max_width : 3
@@ -21,6 +21,10 @@ class Board
 
   def get_position(x, y)
     @grid[y][x].position
+  end
+
+  def value_changed?(x, y)
+    @grid[y][x].changed
   end
 
   def draw_board
@@ -46,6 +50,25 @@ class Board
     end
     board.push("#{column_divider}\n")
     board
+  end
+
+  def available_positions
+    available_positions_array = []
+
+    column_iterator = 0
+    @max_height.times do
+      row_iterator = 0
+      @max_width.times do
+        if value_changed?(row_iterator, column_iterator) == false
+          position = get_position(row_iterator, column_iterator)
+          available_positions << position
+        end
+        row_iterator += 1
+      end
+      column_iterator += 1
+    end
+
+    available_positions_array
   end
 
   private

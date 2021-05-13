@@ -1,18 +1,18 @@
 class Cell
-  attr_reader :position, :value
+  attr_reader :position, :value, :changed
 
   def initialize(position = 0, value = nil)
     @position = position
     @value = value.nil? ? position : value
-    @value_changed = false
+    @changed = false
   end
 
   def write_value(value)
-    if @value_changed == false && %w[X O].include?(value)
+    if @changed == false && %w[X O].include?(value)
       @value = value
-      @value_changed = true
+      @changed = true
       'sucess'
-    elsif @value_changed
+    elsif @changed
       'value already changed'
     else
       'must be X or O'

@@ -7,32 +7,32 @@ class Game
   def initialize(players = %w[Josh Boaz])
     @player_one = Player.new(players[0], 'X')
     @player_two = Player.new(players[1], 'O')
-  end
-
-  def startGame
     @board = Board.new
-    @board.draw_board
-
-    width = @board.max_width
-    height = @board.max_height
-    max_moves = width * height
-    game_flow(max_moves)
   end
 
-  def game_flow(max_moves)
+  def start_game
+    draw_board
+    max_moves = @board.board_size
     moves_made = 0
 
     while moves_made < max_moves
-
+      collect_player_move
+      moves_made += 1
     end
   end
 
-  def turn_controller
+  private
+
+  def draw_board
+    puts @board.draw_board
+  end
+
+  def collect_player_move
     if @turn == @player_one.name
-      collect_move(one)
+      collect_move(@player_one)
       @turn == @player_two.name
     else
-      collect_move(two)
+      collect_move(@player_two)
       @turn == @player_one.name
     end
   end
