@@ -9,8 +9,21 @@ class Game
   def initialize(players = %w[Josh Boaz])
     @player_one = Player.new(players[0], 'X')
     @player_two = Player.new(players[1], 'O')
+<<<<<<< HEAD
     @active_player = @player_one
     @board = Board.new
+=======
+  end
+
+  def start_game
+    @board = Board.new
+    puts @board.draw_board
+
+    width = @board.max_width
+    height = @board.max_height
+    max_moves = width * height
+    game_flow(max_moves)
+>>>>>>> b9db16f4ff1e5f421ba8ff830046692c2c56ed16
   end
 
   def start_game
