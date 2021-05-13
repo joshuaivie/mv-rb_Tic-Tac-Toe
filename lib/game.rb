@@ -43,7 +43,7 @@ class Game
     puts "\n\nIt's #{player.name}'s turn to make a move. Enter one of the numbers below to make your move. \n#{available_positions.join(',')}"
     move = gets.chomp
     if available_positions.any?(move.to_i)
-      move
+      register_player_move(move.to_i)
     else
       puts "\nOops! It looks like that is an invalid move, #{player.name}. Try again!"
       sleep(2)
@@ -55,7 +55,10 @@ class Game
   def available_positions
     @board.available_positions.sort
   end
-end
 
-game = Game.new
-game.start_game
+  def register_player_move(move)
+    @board.set_value(move)
+    coordinate = @board.map_position_to_coordinate(move)
+    @active_player.make_move(coordinate)
+  end
+end

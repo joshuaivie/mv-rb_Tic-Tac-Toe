@@ -11,7 +11,10 @@ class Board
     @grid = build_grid
   end
 
-  def set_value(x, y, value)
+  def set_value(position, value)
+    positions = map_position_to_coordinate(position)
+    x = positions[0]
+    y = positions[1]
     @grid[x][y].write_value(value)
   end
 
@@ -25,6 +28,11 @@ class Board
 
   def value_changed?(x, y)
     @grid[x][y].changed
+  end
+
+  def map_position_to_coordinate(position)
+    map = position_to_coordinate_map
+    map[position.to_s]
   end
 
   def draw_board
