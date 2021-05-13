@@ -12,23 +12,23 @@ class Board
   end
 
   def set_value(x, y, value)
-    @grid[y][x].write_value(value)
+    @grid[x][y].write_value(value)
   end
 
   def get_value(x, y)
-    @grid[y][x].value
+    @grid[x][y].value
   end
 
   def get_position(x, y)
-    @grid[y][x].position
+    @grid[x][y].position
   end
 
   def value_changed?(x, y)
-    @grid[y][x].changed
+    @grid[x][y].changed
   end
 
   def draw_board
-    column_iterator = 0
+    row_iterator = 0
     column_divider = "#{'+---' * @max_width}+"
     board = []
 
@@ -36,17 +36,17 @@ class Board
       board.push("#{column_divider}\n")
 
       row = []
-      row_iterator = 0
+      column_iterator = 0
       @max_width.times do
         value = get_value(row_iterator, column_iterator)
-        cell_text = row_iterator == (@max_width - 1) ? "| #{value} |" : "| #{value} "
+        cell_text = column_iterator == (@max_width - 1) ? "| #{value} |" : "| #{value} "
         row.push(cell_text)
-        row_iterator += 1
+        column_iterator += 1
       end
 
       result_string = row.join
       board.push("#{result_string}\n")
-      column_iterator += 1
+      row_iterator += 1
     end
     board.push("#{column_divider}\n")
     board
@@ -55,17 +55,17 @@ class Board
   def available_positions
     available_positions_array = []
 
-    column_iterator = 0
+    row_iterator = 0
     @max_height.times do
-      row_iterator = 0
+      column_iterator = 0
       @max_width.times do
         if value_changed?(row_iterator, column_iterator) == false
           position = get_position(row_iterator, column_iterator)
-          available_positions << position
+          available_positions_array << position
         end
-        row_iterator += 1
+        column_iterator += 1
       end
-      column_iterator += 1
+      row_iterator += 1
     end
 
     available_positions_array
@@ -87,12 +87,12 @@ class Board
 
     @max_height.times do
       row = []
-      row_iterator = 0
+      column_iterator = 0
 
       @max_width.times do
         position = @positions_array[positions_array_iterator]
-        row[row_iterator] = Cell.new(position)
-        row_iterator += 1
+        row[column_iterator] = Cell.new(position)
+        column_iterator += 1
         positions_array_iterator += 1
       end
 
@@ -103,5 +103,6 @@ class Board
   end
 end
 
-board = Board.new(4, 4)
-puts board.draw_board
+# board = Board.new(3, 3)
+# board.set_value(1, 2, 'X')
+# puts board.available_positions
