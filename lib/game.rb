@@ -47,7 +47,7 @@ class Game
     else
       puts "\nOops! It looks like that is an invalid move, #{player.name}. Try again!"
       sleep(2)
-      print "\r#{"\e[A" * 7}\e[J"
+      print "\r#{"\e[A" * 6}\e[J"
       collect_move(player)
     end
   end
@@ -57,7 +57,7 @@ class Game
   end
 
   def register_player_move(move)
-    @board.set_value(move)
+    @board.set_value(move, @active_player.symbol)
     coordinate = @board.map_position_to_coordinate(move)
     @active_player.make_move(coordinate)
   end
