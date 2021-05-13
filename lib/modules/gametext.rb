@@ -7,4 +7,4 @@ module GameText
                   'When all 9 squares are full, the game is over. If no player has 3 marks in a row, the game ends in a tie.']
   EXIT_MESSAGE = ['Thank you for playing our game', 'Have a great day!']
   INTERRUPT_MESSAGE = ["\nWe're sorry to see you go.\nExiting..."]
-end
+end.freeze

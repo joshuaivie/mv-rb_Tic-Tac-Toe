@@ -81,7 +81,7 @@ begin
     if start_game?
       player_names = collect_player_names
       current_game = Game.new(player_names)
-      current_game.startGame
+      current_game.start_game
     else
       exit
     end
