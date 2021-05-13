@@ -11,7 +11,6 @@ class Board
     @grid = build_grid
   end
 
-<<<<<<< HEAD
   def set_value(x, y, value)
     @grid[x][y].write_value(value)
   end
@@ -26,18 +25,6 @@ class Board
 
   def value_changed?(x, y)
     @grid[x][y].changed
-=======
-  def set_value(width, height, value)
-    @grid[height][width].write_value(value)
-  end
-
-  def get_value(width, height)
-    @grid[width][height].value
-  end
-
-  def get_position(width, height)
-    @grid[height][width].position
->>>>>>> b9db16f4ff1e5f421ba8ff830046692c2c56ed16
   end
 
   def draw_board
@@ -63,6 +50,23 @@ class Board
     end
     board.push("#{column_divider}\n")
     board
+  end
+
+  def position_to_coordinate_map
+    map = {}
+
+    row_iterator = 0
+    @max_height.times do
+      column_iterator = 0
+      @max_width.times do
+        position = get_position(row_iterator, column_iterator).to_s
+        map[position] = [row_iterator, column_iterator]
+        column_iterator += 1
+      end
+      row_iterator += 1
+    end
+
+    map
   end
 
   def available_positions
@@ -115,12 +119,3 @@ class Board
     grid
   end
 end
-
-<<<<<<< HEAD
-# board = Board.new(3, 3)
-# board.set_value(1, 2, 'X')
-# puts board.available_positions
-=======
-board = Board.new
-puts board.draw_board
->>>>>>> b9db16f4ff1e5f421ba8ff830046692c2c56ed16
