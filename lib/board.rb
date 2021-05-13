@@ -11,16 +11,16 @@ class Board
     @grid = build_grid
   end
 
-  def set_value(x, y, value)
-    @grid[y][x].write_value(value)
+  def set_value(width, height, value)
+    @grid[height][width].write_value(value)
   end
 
-  def get_value(x, y)
-    @grid[y][x].value
+  def get_value(width, height)
+    @grid[width][height].value
   end
 
-  def get_position(x, y)
-    @grid[y][x].position
+  def get_position(width, height)
+    @grid[height][width].position
   end
 
   def draw_board
@@ -80,5 +80,5 @@ class Board
   end
 end
 
-board = Board.new()
+board = Board.new
 puts board.draw_board
