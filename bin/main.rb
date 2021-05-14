@@ -47,9 +47,10 @@ begin
     puts message
     name = gets.chomp
 
-    if name.nil?
+    if name.empty? || name.chars[0] == ' ' || name.include?("\e[D")
       puts "\nKindly input a valid name/alias"
-      store_name
+      sleep(2)
+      store_name(message)
     else
       name
     end
