@@ -87,6 +87,21 @@ begin
     end
   end
 
+  def start_game
+    player_names = collect_player_names
+    current_game = Game.new(player_names)
+    while current_game.moves_made < current_game.max_moves
+      clear_screen
+      puts current_game.draw_board
+
+      move = collect_player_move(current_game)
+      current_game.register_player_move(move)
+      current_game.switch_active_player
+    end
+    puts current_game.game_end
+    sleep(3)
+  end
+
   def luanch_game
     include GameUtils
 
@@ -94,16 +109,7 @@ begin
     print_welcome_message
     print_game_instructions
     if start_game?
-      player_names = collect_player_names
-      current_game = Game.new(player_names)
-      while current_game.moves_made < current_game.max_moves
-        clear_screen
-        puts current_game.draw_board
-
-        move = collect_player_move(current_game)
-        current_game.register_player_move(move)
-        current_game.switch_active_player
-      end
+      start_game
     else
       exit
     end
