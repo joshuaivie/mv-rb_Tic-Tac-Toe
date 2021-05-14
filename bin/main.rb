@@ -73,6 +73,20 @@ begin
     [player_one_name, player_two_name]
   end
 
+  def collect_player_move(game)
+    puts game.solicit_move
+    move = gets.chomp
+
+    if game.available_positions.any?(move.to_i)
+      move.to_i
+    else
+      puts game.warn_invalid_move
+      sleep(2)
+      print "\r#{"\e[A" * 6}\e[J"
+      collect_player_move(game)
+    end
+  end
+
   def luanch_game
     include GameUtils
 
@@ -82,7 +96,14 @@ begin
     if start_game?
       player_names = collect_player_names
       current_game = Game.new(player_names)
-      current_game.start_game
+      while current_game.moves_made < current_game.max_moves
+        clear_screen
+        puts current_game.draw_board
+
+        move = collect_player_move(current_game)
+        current_game.register_player_move(move)
+        current_game.switch_active_player
+      end
     else
       exit
     end
