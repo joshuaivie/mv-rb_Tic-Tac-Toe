@@ -99,7 +99,6 @@ begin
       while current_game.moves_made < current_game.max_moves
         clear_screen
         puts current_game.draw_board
-
         move = collect_player_move(current_game)
         current_game.register_player_move(move)
         current_game.switch_active_player
@@ -108,6 +107,7 @@ begin
       exit
     end
   end
+
 
   at_exit do
     include GameUtils
@@ -120,6 +120,7 @@ begin
   end
 
   luanch_game
+  
 rescue Interrupt
   system('stty -echoctl')
   puts GameText::INTERRUPT_MESSAGE

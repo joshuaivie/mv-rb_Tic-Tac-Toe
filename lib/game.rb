@@ -12,7 +12,7 @@ class Game
     @player_two = Player.new(players[1], 'O')
   end
 
-  def startGame
+  def start_game
     @board = Board.new
     puts @board.draw_board
     width = @board.max_width
