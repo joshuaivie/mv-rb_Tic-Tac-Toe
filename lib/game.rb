@@ -3,7 +3,6 @@ require_relative './player'
 require_relative './board'
 
 class Game
-  attr_reader :player_one, :player_two, :board
   include GameUtils
   attr_reader :player_one, :player_two, :active_player, :max_moves, :moves_made
 
@@ -35,7 +34,6 @@ class Game
     turn_controller
     conclusion
   end
-
 
   def turn_controller
     if @turn == @player_one.name

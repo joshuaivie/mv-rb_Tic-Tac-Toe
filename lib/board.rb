@@ -3,6 +3,8 @@ require_relative './cell'
 class Board
   attr_reader :grid, :positions_array, :max_width, :max_height, :board_size
 
+  WINNING_LISTS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].freeze
+
   def initialize(max_width = 3, max_height = 3)
     @max_width = max_width <= 3 ? max_width : 3
     @max_height = max_height <= 3 ? max_height : 3
@@ -126,4 +128,9 @@ class Board
 
     grid
   end
+
+  def game_end?
+    WINNING_LISTS.any? do |lists|
+      [cells[lists[0]], cells[lists[1]], cells[lists[2]]].uniq.length == 1
+    end
 end

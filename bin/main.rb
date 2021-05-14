@@ -115,7 +115,6 @@ begin
     end
   end
 
-
   at_exit do
     include GameUtils
     GameUtils.clear_screen
@@ -127,7 +126,6 @@ begin
   end
 
   luanch_game
-  
 rescue Interrupt
   system('stty -echoctl')
   puts GameText::INTERRUPT_MESSAGE
