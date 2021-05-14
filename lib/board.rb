@@ -1,4 +1,5 @@
 require_relative './cell'
+require_relative './modules/textformat'
 
 class Board
   attr_reader :grid, :positions_array, :max_width, :max_height, :board_size
@@ -46,7 +47,12 @@ class Board
       row = []
       column_iterator = 0
       @max_width.times do
-        value = get_value(row_iterator, column_iterator)
+        value_temp = get_value(row_iterator, column_iterator)
+        value = if value_temp == 'X'
+                  value_temp.blue.bold
+                else
+                  value_temp == 'O' ? value_temp.red.bold : value_temp.to_s.gray
+                end
         cell_text = column_iterator == (@max_width - 1) ? "| #{value} |" : "| #{value} "
         row.push(cell_text)
         column_iterator += 1
