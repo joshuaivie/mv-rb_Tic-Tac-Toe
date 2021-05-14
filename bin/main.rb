@@ -28,9 +28,10 @@ begin
     puts "\nPress 1 to start.     Press 2 to Exit."
     user_input = gets.chomp
 
-    if user_input.to_i == 1
+    case user_input.to_i
+    when 1
       true
-    elsif user_input.to_i == 2
+    when 2
       false
     else
       clear_screen

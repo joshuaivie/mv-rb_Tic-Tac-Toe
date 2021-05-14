@@ -13,21 +13,21 @@ class Board
 
   def set_value(position, value)
     positions = map_position_to_coordinate(position)
-    x = positions[0]
-    y = positions[1]
-    @grid[x][y].write_value(value)
+    x_coordinate = positions[0]
+    y_coordinate = positions[1]
+    @grid[x_coordinate][y_coordinate].write_value(value)
   end
 
-  def get_value(x, y)
-    @grid[x][y].value
+  def get_value(x_coordinate, y_coordinate)
+    @grid[x_coordinate][y_coordinate].value
   end
 
-  def get_position(x, y)
-    @grid[x][y].position
+  def get_position(x_coordinate, y_coordinate)
+    @grid[x_coordinate][y_coordinate].position
   end
 
-  def value_changed?(x, y)
-    @grid[x][y].changed
+  def value_changed?(x_coordinate, y_coordinate)
+    @grid[x_coordinate][y_coordinate].changed
   end
 
   def map_position_to_coordinate(position)

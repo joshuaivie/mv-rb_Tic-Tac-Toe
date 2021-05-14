@@ -4,7 +4,7 @@ module GameUtils
   end
 
   def word_wrap(words, indent = 0)
-    character_array = words.split('')
+    character_array = words.chars
     new_character_array = []
     reset_counter = 0
 
@@ -21,11 +21,10 @@ module GameUtils
             new_character_array << ' '
             reset_counter += 1
           end
-          reset_counter = 0
         else
           character = "\n"
-          reset_counter = 0
         end
+        reset_counter = 0
       end
       new_character_array << character
       reset_counter += 1

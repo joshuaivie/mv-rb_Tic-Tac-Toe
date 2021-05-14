@@ -40,7 +40,8 @@ class Game
   end
 
   def collect_move(player)
-    puts "\n\nIt's #{player.name}'s turn to make a move. Enter one of the numbers below to make your move. \n#{available_positions.join(',')}"
+    puts "\n\nIt's #{player.name}'s turn to make a move.
+    Enter one of the numbers below to make your move. \n#{available_positions.join(',')}"
     move = gets.chomp
     if available_positions.any?(move.to_i)
       register_player_move(move.to_i)
