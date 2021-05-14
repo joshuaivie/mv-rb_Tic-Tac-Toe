@@ -68,7 +68,22 @@ begin
 
   def collect_player_names
     player_one_name = store_name('Please enter the name/alias of player 1')
+
+    while player_one_name == '' || name.contains_letter(player_one_name).nil?
+      puts 'Enter valid name to continue'
+      puts "\nKindly input a valid name/alias"
+      player_two_name = gets.chomp
+      clear_screen
+    end
+
     player_two_name = store_name('Please enter the name/alias of player 2')
+
+    while player_two_name == '' || name.contains_letter(player_two_name).nil?
+      puts 'Enter valid name to continue'
+      puts "\nKindly input a valid name/alias"
+      player_two_name = gets.chomp
+      
+    end
     print_names(player_one_name, player_two_name)
     [player_one_name, player_two_name]
   end
