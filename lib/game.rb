@@ -1,9 +1,10 @@
-require_relative './modules/gameutils'
 require_relative './player'
 require_relative './board'
+require_relative './logic'
 
 class Game
-  include GameUtils
+  include GameLogic
+
   attr_reader :player_one, :player_two, :active_player, :max_moves, :moves_made
 
   def initialize(players = %w[Josh Boaz])
@@ -47,18 +48,28 @@ class Game
     @moves_made += 1
   end
 
-  def game_end
-    win_or_draw = rand(2)
-    winner = rand(2)
+  def winner
+    coordinates = winning_coordinates(@board.max_width, @board.max_height)
+    values = run_combinations(@board, coordinates)
+    values.each do |value|
+      return winner_by_symbol(value[0]) if value.uniq.count <= 1
+    end
+    false
+  end
 
-    if win_or_draw == 1
-      if winner == 1
-        "Congratulations #{@player_one.name}, you won this round!"
-      else
-        "Congratulations #{@player_two.name}, you won this round!"\
-      end
-    else
-      "It's a tie!\n\nGood game"
+  def announce_draw
+    "\n\nWow, it looks like this round's a tie! Good game!"
+  end
+
+  def announce_winner(winner)
+    "\n\nCongratulations #{winner}, you won this round!"
+  end
+
+  def winner_by_symbol(symbol)
+    if @player_one.symbol == symbol
+      @player_one.name
+    elsif @player_two.symbol == symbol
+      @player_two.name
     end
   end
 end
