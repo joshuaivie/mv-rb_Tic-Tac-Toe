@@ -46,4 +46,19 @@ class Game
     @active_player.make_move(coordinate)
     @moves_made += 1
   end
+
+  def game_end
+    win_or_draw = rand(2)
+    winner = rand(2)
+
+    if win_or_draw == 1
+      if winner == 1
+        "Congratulations #{@player_one.name}, you won this round!"
+      else
+        "Congratulations #{@player_two.name}, you won this round!"\
+      end
+    else
+      "It's a tie!\n\nGood game"
+    end
+  end
 end
