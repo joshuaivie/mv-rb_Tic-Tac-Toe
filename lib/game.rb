@@ -1,6 +1,6 @@
 require_relative './player'
 require_relative './board'
-require_relative './logic'
+require_relative './game_logic'
 
 class Game
   include GameLogic

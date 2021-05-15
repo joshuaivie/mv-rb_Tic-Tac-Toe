@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-require_relative '../lib/modules/gametext'
-require_relative '../lib/modules/gameutils'
-require_relative '../lib/modules/textformat'
+require_relative '../lib/modules/game_text'
+require_relative '../lib/modules/game_utils'
+require_relative '../lib/modules/text_format'
 require_relative '../lib/game'
 
 begin
@@ -48,7 +48,7 @@ begin
     puts message
     name = gets.chomp
 
-    if name.nil?
+    if name.empty? || name.chars[0] == ' ' || name.include?("\e[D")
       puts "\nKindly input a valid name/alias"
       store_name
     else

@@ -1,5 +1,5 @@
 require_relative './cell'
-require_relative './modules/textformat'
+require_relative './modules/text_format'
 
 class Board
   attr_reader :grid, :positions_array, :max_width, :max_height, :board_size
