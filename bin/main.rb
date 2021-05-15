@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
-require_relative '../lib/modules/gametext'
-require_relative '../lib/modules/gameutils'
+require_relative '../lib/modules/game_text'
+require_relative '../lib/modules/game_utils'
+require_relative '../lib/modules/text_format'
 require_relative '../lib/game'
 
 begin
   def print_welcome_message
     include GameText
-    puts WELCOME_MESSAGE
+    puts WELCOME_MESSAGE.bold
   end
 
   def print_game_instructions
@@ -25,7 +26,7 @@ begin
   def start_game?
     include GameUtils
 
-    puts "\nPress 1 to start.     Press 2 to Exit."
+    puts "\nPress 1 to start.     Press 2 to Exit.".bold
     user_input = gets.chomp
 
     case user_input.to_i
@@ -47,9 +48,10 @@ begin
     puts message
     name = gets.chomp
 
-    if name.nil?
+    if name.empty? || name.chars[0] == ' ' || name.include?("\e[D")
       puts "\nKindly input a valid name/alias"
-      store_name
+      sleep(2)
+      store_name(message)
     else
       name
     end
@@ -62,7 +64,7 @@ begin
     puts "#{name_one} will be 'X' and #{name_two} will be 'O'"
     sleep(2)
     GameUtils.clear_screen
-    puts 'BEGIN'
+    puts 'BEGIN'.bold
     sleep(2)
   end
 
@@ -87,6 +89,20 @@ begin
     end
   end
 
+  def end_game(status, current_game)
+    clear_screen
+    puts current_game.draw_board
+    sleep(1)
+    case status
+    when 'win'
+      puts current_game.announce_winner(current_game.winner)
+    when 'draw'
+      puts current_game.announce_draw
+    end
+
+    sleep(5)
+  end
+
   def start_game
     player_names = collect_player_names
     current_game = Game.new(player_names)
@@ -97,9 +113,12 @@ begin
       move = collect_player_move(current_game)
       current_game.register_player_move(move)
       current_game.switch_active_player
+      if current_game.winner
+        end_game('win', current_game)
+        break
+      end
     end
-    puts current_game.game_end
-    sleep(3)
+    end_game('draw', current_game) unless current_game.winner
   end
 
   def luanch_game

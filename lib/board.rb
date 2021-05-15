@@ -1,13 +1,12 @@
 require_relative './cell'
+require_relative './modules/text_format'
 
 class Board
   attr_reader :grid, :positions_array, :max_width, :max_height, :board_size
 
-  WINNING_LISTS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].freeze
-
-  def initialize(max_width = 3, max_height = 3)
-    @max_width = max_width <= 3 ? max_width : 3
-    @max_height = max_height <= 3 ? max_height : 3
+  def initialize
+    @max_width = 3
+    @max_height = 3
     @board_size = max_height * max_width
     @positions_array = create_positions
     @grid = build_grid
@@ -48,7 +47,12 @@ class Board
       row = []
       column_iterator = 0
       @max_width.times do
-        value = get_value(row_iterator, column_iterator)
+        value_temp = get_value(row_iterator, column_iterator)
+        value = if value_temp == 'X'
+                  value_temp.blue.bold
+                else
+                  value_temp == 'O' ? value_temp.red.bold : value_temp.to_s.gray
+                end
         cell_text = column_iterator == (@max_width - 1) ? "| #{value} |" : "| #{value} "
         row.push(cell_text)
         column_iterator += 1
