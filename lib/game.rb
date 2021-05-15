@@ -5,7 +5,7 @@ require_relative './game_logic'
 class Game
   include GameLogic
 
-  attr_reader :player_one, :player_two, :active_player, :max_moves, :moves_made
+  attr_reader :max_moves, :moves_made
 
   def initialize(players = %w[Josh Boaz])
     @player_one = Player.new(players[0], 'X')
