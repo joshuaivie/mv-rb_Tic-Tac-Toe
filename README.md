@@ -1,21 +1,28 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Tic-Tac-Toe Game
+# TIC TAC TOE GAME - OPP
 
-> A simple implementation of a tic-tac-toe game using Ruby
+> The TIC TAC TOE game was built to be played on the command line, with two players playing against each other in terns, with the board being displayed in between the turns.
 
-<!-- ![screenshot](./app_screenshot.png)
+# Objectives
 
-Additional description about the project and its features. -->
+> The main goal of this build is to put in practice the concepts of Object Oriented Programming in Ruby.
 
-## Built With
+# Instructions on How to Play
 
-- Ruby
-- Git Work flows
+> This game is to be played on the command line. To start playing, run "bin/main.rb", and then follow the promted instructions.
+The player need to understand the following:-
 
-<!-- ## Live Demo
+  1. The First and Second player should input the desired name(The name must not be empty, only letters can be used).
+  2. The players then play by picking a number bewteen 1-9 as displayed on the board.
+  3. The players will each take turns picking the available numbers until a winning con dimtion is met, which is a series of consecutive signs in one line.
+  4. When there no move available and a win condition is not met, the game ends in a draw.
 
-[Live Demo Link](https://livedemo.com) -->
+Here is an example of the game
+
+![screenshot](./xo.gif)
+
+This game is fun playing just like it is fun building it.
 
 ## Getting Started
 
@@ -29,8 +36,9 @@ To get a local copy up and running, follow these simple example steps.
 
 1. Code Editor
 2. Terminal (Bash)
-3. Git
+3. Git Workflows best practices
 4. Ruby
+5. Rubocop
 
 ### Setup
 

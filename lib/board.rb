@@ -132,4 +132,9 @@ class Board
 
     grid
   end
+
+  def game_end?
+    WINNING_LISTS.any? do |lists|
+      [cells[lists[0]], cells[lists[1]], cells[lists[2]]].uniq.length == 1
+    end
 end
